@@ -16,9 +16,9 @@ class TS(MAB):
         beta_val = [0.0] * self.K  #initialize beta_draw value for arms
         for k in range(self.K):
             beta_val[k] = np.random.beta(self.S[k] + 1, self.N[k] - self.S[k] + 1)  #beta_draw with (click, unclick) for each arms
-            items = sorted([(beta_val[k], k) for k in range(self.K)], reverse=True)
-            result = [items[i][1] for i in range(required_num)]
-            return result
+        items = sorted([(beta_val[k], k) for k in range(self.K)], reverse=True)
+        result = [items[i][1] for i in range(required_num)]
+        return result
 
     def update(self, selected_items, feedback, clicked_idx):
         assert len(selected_items) == len(feedback)

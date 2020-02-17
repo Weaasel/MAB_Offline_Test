@@ -5,6 +5,8 @@ from user import User
 from MAB import MAB
 from TS import TS
 from UCB1 import UCB1
+from dgp import dgp
+from Monitord_TS import Monitord_TS
 
 class Simulator:
     def __init__(self, itemid, select_num, itemProb):
@@ -32,21 +34,21 @@ class Simulator:
 
         models = [
             TS(self.itemid, self.L),
-            UCB1(self.itemid, self.L),
-            MAB(self.itemid, self.L)  #current 3 models
+            dgp(self.itemid, self.L),
+            Monitord_TS(self.itemid, self.L),
+            MAB(self.itemid, self.L)  #current 4 models
         ]
-        labels = ['TS', 'UCB1', 'Random']
+        labels = ['TS', 'dgp', 'Monitord_TS', 'Random']
         regret = [0.0] * len(models)
         plots = [[] for _ in range(len(models))]
         step = 0
         pointNum = 10000000  #graph point_num
         base_step = []
-        itemProb_shift = step_cnt/len(self.itemProb)  #itemProb shift timing
-        print(itemProb_shift)
+        itemProb_shift = 1 + step_cnt/len(self.itemProb)  #itemProb shift timing
         while step < step_cnt:
             step += 1
             itemProb_idx = (step-1)/itemProb_shift
-            if step % 10000 == 0:
+            if step % 1000 == 0:
                 print(step, step_cnt)
 
             for i in range(len(models)):
@@ -54,7 +56,6 @@ class Simulator:
                 selected_items = models[i].select_items(self.L)  #select arms
                 feedback, clicked_idx = user.react(selected_items, itemProb_idx)  #get feedback with binomial draw
                 models[i].update(selected_items, feedback, clicked_idx)  #update click/unclick
-               
                 regret[i] += sum(sorted(self.itemProb[itemProb_idx], reverse=True)[:self.L]) - sum([self.itemProb[itemProb_idx][l] for l in selected_items])
 
 #regret[i] += sum([self.posProb[l] * self.itemProb[itemProb_idx][l] for l in range(self.L)]) - feedback.count(True)  #calculate regret

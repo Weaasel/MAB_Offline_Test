@@ -19,7 +19,7 @@ class UCB1(MAB):
             result.append(self.initList[-1])
             self.initList.pop()
         for i in range(self.K):
-            if self.N[i] == 0:continue
+            if self.N[i] == 0: continue
             items.append((self.S[i]/self.N[i] + (2*np.log(self.turn)/self.N[i])**0.5, i))
         items = sorted(items, reverse=True)
         for i in range(len(items)):
