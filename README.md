@@ -36,5 +36,5 @@ simulator 클래스에 세팅(포지션 별 관측 확률, 아이템 별 관측 
 	뽑은 position 이하의 item만 N을 up 할 수 있도록 코드 수정 예정.
   
 ## 실험 결과 예시(regretion)
-<img width="400" alt="I-CTR" src="https://github.daumkakao.com/weasel-lee/personal_issues/blob/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/MAB_Offline_test/2020-02-17-02-02-30.graph_without_random.png?raw=true">  
+<img width="500" alt="Result" src="https://github.daumkakao.com/weasel-lee/personal_issues/blob/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D/MAB_Offline_test/2020-02-17-02-02-30.graph_without_random.png?raw=true">  
 
