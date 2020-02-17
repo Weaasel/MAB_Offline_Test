@@ -4,19 +4,18 @@ import random
 import pickle
 
 class MAB(object):
-    def __init__(self, itemid, posProb):
+    def __init__(self, itemid, select_num):
         self.K = len(itemid)  #num of whole arms
-        self.L = len(posProb)  #num of drawing arms in each turn
+        self.L = select_num  #num of drawing arms in each turn
         self.turn = 0  #num of draws(turns)
         self.itemid = itemid  #list of itemids
-        self.posProb = posProb  #list of position prob of items
 
     #return sorted list of item numvers with length require_num. Default Random
     def select_items(self, required_num):
         random.shuffle(self.itemid)
         return self.itemid[:required_num]
 
-    def update(self, selected_items, feedback):
+    def update(self, selected_items, feedback, clicked_idx):
         pass
 
     def save(self, fname):

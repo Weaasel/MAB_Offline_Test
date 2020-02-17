@@ -5,8 +5,8 @@ from scipy.stats import beta
 from MAB import MAB
 
 class UCB1(MAB):
-    def __init__(self, itemid, posProb):
-        super(UCB1,self).__init__(itemid, posProb)
+    def __init__(self, itemid, select_num):
+        super(UCB1,self).__init__(itemid, select_num)
         self.S = [0 for _ in range(self.K)]  #clicks
         self.N = [0 for _ in range(self.K)]  #imps
         self.initList = [i for i in range(self.K)]
@@ -28,9 +28,9 @@ class UCB1(MAB):
             result.append(items[i][1])
         return result
 
-    def update(self, selected_items, feedback):
+    def update(self, selected_items, feedback, clicked_idx):
         assert len(selected_items) == len(feedback)
-        for l in range(len(selected_items)):
+        for l in range(clicked_idx+1):
             k = selected_items[l]
             self.N[k] += 1  #imps += 1
             if feedback[l]:

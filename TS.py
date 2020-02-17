@@ -5,8 +5,8 @@ from scipy.stats import beta
 from MAB import MAB
 
 class TS(MAB):
-    def __init__(self, itemid, posProb):
-        super(TS,self).__init__(itemid, posProb)
+    def __init__(self, itemid, select_num):
+        super(TS,self).__init__(itemid, select_num)
         self.S = [0 for _ in range(self.K)]  #clicks
         self.N = [0 for _ in range(self.K)]  #imps
 
@@ -20,10 +20,10 @@ class TS(MAB):
             result = [items[i][1] for i in range(required_num)]
             return result
 
-    def update(self, selected_items, feedback):
+    def update(self, selected_items, feedback, clicked_idx):
         assert len(selected_items) == len(feedback)
-        for l in range(len(selected_items)):
+        for l in range(clicked_idx+1):
             k = selected_items[l]
-            self.N[k] += 1  #imps += 1
+            self.N[k] += 1  #vimps += 1
             if feedback[l]:
                 self.S[k] += 1  #if feedback, then clicks += 1
