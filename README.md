@@ -1,5 +1,7 @@
 # MAB 모델 오프라인 테스트를 위한 환경 구축
 
+## Reference
+https://github.com/wwiiiii/Multi-Armed-Bandit
 ## 구성
 simulator 클래스에 세팅(포지션 별 관측 확률, 아이템 별 관측 시 클릭될 조건부 확률)을 준 뒤 run을 실행하면 해당 세팅에서 각 모델(Thompson Sampling, UCB1,  Random, etc.)의 행동을 시뮬레이션 한 뒤 결과를 저장한다.
 
